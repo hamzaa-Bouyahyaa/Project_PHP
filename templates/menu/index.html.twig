@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des menus!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    .flex {
+        display: flex;
+    }
+    .flex-column {
+        flex-direction: column;
+    }
+    .my-2 { margin-top: 10px; margin-bottom: 10px;}
+</style>
+
+<div class="example-wrapper">
+    <h1>🍔Page de gestion des menu🍔</h1>
+    <h2><small><a href="{{ path('MenuAjouter')}}">Ajouter</a></small></h2>
+
+    <div class="flex flex-column">
+        <div class="my-4">
+            {% for menu in menus %}
+                <h5>{{menu.titre | upper}}:</h5>
+                <a class="btn btn-danger" href="{{ path('MenuDelete', {'id': menu.id }) }}" 
+                onclick="return confirm('Are you sure to delete: {{ menu.titre }}')">Supprimer</a>
+                <ul>
+                    <li><strong>calories:</strong> {{menu.nbrCalories}}</li>
+                    <li><strong>prix:</strong> {{menu.price}}</li>
+                </ul>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+{% endblock %}
